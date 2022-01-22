@@ -158,7 +158,7 @@ ex) git clone https://github.com/hiw6352/developDj.git
 1. 현재 내가 위치한 Branch확인
  - git branch : *가 붙아있는 브랜치가 현재 활성화된 브랜치
  - git branch -r : 원격 저장소의 브랜치 확인
- - git branch -v : 브랜치의 마지막 커밋 메시지 
+ - git branch -v : 브랜치의 마지막 커밋 메시지
 
 2. 브랜치 생성과 이동, 삭제
  - git branch 브랜치명 : branch 생성
@@ -173,5 +173,13 @@ ex) git clone https://github.com/hiw6352/developDj.git
  - 위의 메세지 처럼 --set-upstream 옵션을 사용해 보자.
 
 [Git (10)] Git Branch(2) - 브랜치 병합하기(git branch merge)
- - 
+ - master 브랜치와 병합
+  - git checkout master 명령어로 마스터 브랜치로 이동
+  - git merge 브랜치명 * merge후에도 브랜치는 그대로 남아있음
+  - Conflict 에러:  - 각각의 브랜치에서 동일한 파일을 수정하였는데, merge를 하려고 했을때 git이 어떤 내용이 맞는지 판단할 수 없기 때문에 충돌이 발생함
+    - 직접 양 브랜치간의 내용을 비교하여 수정 후 add, commit처리한다
+  - merge 작업 취소
+    - merge를 하다가 Conflict가 발생했을 때 일단, 머지 작업을 취소하고 이전 상태로 돌아갈 수 있다.
+    - git merge --abort
+
 출처: https://goddaehee.tistory.com/254?category=381481 [갓대희의 작은공간]
