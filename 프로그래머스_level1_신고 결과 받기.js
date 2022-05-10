@@ -1,36 +1,18 @@
 function solution(id_list, report, k) {
     var answer = [];
     let reportFromUser = new Map();
+    let reportCnt = new Map();
     let reportToUser = new Map();
-    report.forEach(item=>{
-        let targetUser = item.split(' ')[1]
-        let user = item.split(' ')[0]
-        if(reportFromUser.has(targetUser)){
-            reportFromUser.get(targetUser).add(user)
-        }else{
-            let set = new Set();
-            set.add(user)
-            reportFromUser.set(targetUser,set)
+    let reports = [... new Set(report)].map(a=>{return a.split(' ')})
+    
+    for(const fromUser of reports){
+        reportFromUser.set(fromUser[1],reportFromUser.get(fromUser[1])+1||1)
+    }
+    for(const count of reports){
+        if(reportFromUser.get(count[1]) >= k){
+            reportToUser.set(count[0],reportToUser.get(count[0])+1||1)
         }
-        
-        if(reportToUser.has(user)){
-            reportToUser.get(user).add(targetUser)
-        }else{
-            let set = new Set();
-            set.add(targetUser)
-            reportToUser.set(user,set)
-        }
-    })
-    id_list.forEach((item)=>{
-        let mailCnt = 0;
-        if(reportToUser.has(item)){
-            reportToUser.get(item).forEach((el)=>{
-                if(reportFromUser.get(el).size >= k){
-                    mailCnt++;
-                }
-            })
-        }
-        answer.push(mailCnt)
-    })
+    }
+    answer = [...id_list].map(a=>{return reportToUser.get(a)||0})
     return answer;
 }
